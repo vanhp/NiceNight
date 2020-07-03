@@ -107,7 +107,7 @@ class SleepTrackerFragment : Fragment() {
 
         sleepTrackerViewModel.nights.observe(viewLifecycleOwner, Observer {
            // Toast.makeText(this.context,"got a ${it}",Toast.LENGTH_SHORT).show()
-            it?.let{adapter.submitList(it)}
+            it?.let{adapter.addHeaderAndSubmitList(it)}//.submitList(it)}
         })
 
         sleepTrackerViewModel.navigate2SleepDataQuality .observe(viewLifecycleOwner, Observer {

@@ -212,6 +212,12 @@ class SleepTrackerViewModel(
         }
     }
 
+    private val _navigate2SleepDataQuality = MutableLiveData<Long>()
+    val navigate2SleepDataQuality:LiveData<Long>
+        get() = _navigate2SleepDataQuality
+
+    fun onSleepNightClicked(id:Long) { _navigate2SleepDataQuality.value = id}
+    fun onSleepDataQualityNavigated(){_navigate2SleepDataQuality.value = null}
     /**
      * Executes when the CLEAR button is clicked.
      */

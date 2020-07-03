@@ -66,10 +66,11 @@ class SleepTrackerFragment : Fragment() {
 
         // tell the recycle view the adapter to use to display data
         val adapter = SleepNightAdapter(SleepNightListener { nightId ->
-                Toast.makeText(context, "${nightId}", Toast.LENGTH_LONG).show()  })
+              sleepTrackerViewModel.onSleepNightClicked(nightId)  })
+//            Toast.makeText(context, "${nightId}", Toast.LENGTH_LONG).show()})
         binding.sleepList.adapter = adapter
 
-
+     //   Toast.makeText(context, "${nightId}", Toast.LENGTH_LONG).show()
         // Add an Observer on the state variable for showing a Snackbar message
         // when the CLEAR button is pressed.
         sleepTrackerViewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
@@ -108,6 +109,14 @@ class SleepTrackerFragment : Fragment() {
            // Toast.makeText(this.context,"got a ${it}",Toast.LENGTH_SHORT).show()
             it?.let{adapter.submitList(it)}
         })
+
+        sleepTrackerViewModel.navigate2SleepDataQuality .observe(viewLifecycleOwner, Observer {
+            night -> night?.let{ this.findNavController().navigate(SleepTrackerFragmentDirections
+                .actionSleepTrackerFragmentToSleepDetailFragment(night))
+            sleepTrackerViewModel.onSleepDataQualityNavigated()}
+        })
+
+
         return binding.root
     }
 }
